@@ -1,21 +1,23 @@
-def binary_search(li, a):
-    s, e = 0, len(li)-1
-    res = -1
-    while s <= e:
-        m = (s + e) // 2
-        if li[m] < a:
-            res = m
-            s = m + 1
+T = int(input())
+
+#이분 탐색 함수
+def binary_search(arr, num):
+    start = 0
+    end = len(arr) - 1
+    while start <= end:
+        mid = (start + end) // 2
+        if arr[mid] < num:
+            start = mid + 1
         else:
-            e = m - 1
-    return res
-    
-    
-for _ in range(int(input())):
-    N, M = map(int, input().split())
-    A = sorted(list(map(int, input().split())))
-    B = sorted(list(map(int, input().split())))
-    cnt = 0
-    for a in A:
-        cnt += (binary_search(B, a) + 1)
-    print(cnt)
+            end = mid - 1
+    return start #num보다 작은 값의 개수를 반환
+
+for j in range(T):
+    result = 0
+    M_A, M_B = map(int, input().split())
+    A = list(map(int, input().split()))
+    B = list(map(int, input().split()))
+    B.sort() #이분탐색을 위한 정렬
+    for i in range(len(A)):
+        result += binary_search(B, A[i])
+    print(result)
